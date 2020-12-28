@@ -1,0 +1,15 @@
+.button {
+    appearance: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 5px auto -webkit-focus-ring-color;
+    }
+
+    &--cta {
+        min-width: 14rem !important;
+    }
+}

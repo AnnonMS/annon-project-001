@@ -1,0 +1,17 @@
+.center-row {
+    display: flex;
+    flex-flow: row nowrap;
+
+    &--xy {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--x {
+        align-items: center;
+    }
+
+    &--y {
+        justify-content: center;
+    }
+}

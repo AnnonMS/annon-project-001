@@ -8,7 +8,10 @@
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "fix": "npm run fix:eslint && npm run fix:prettier",
+        "fix:eslint": "eslint --fix \"**/*.ts\"",
+        "fix:prettier": "prettier --write \"**/*.ts\""
     },
     "private": true,
     "dependencies": {

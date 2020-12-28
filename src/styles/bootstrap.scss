@@ -1,0 +1,32 @@
+@import 'core/variables';
+
+$grid-columns: 12;
+$grid-gutter-width: $gutter;
+
+$link-hover-decoration: none;
+$body-bg: #fff;
+
+$space: (2 * $gutter);
+
+$grid-breakpoints: (
+    xs: 0,
+    xsm: $xsm,
+    sm: $sm,
+    smd: $smd,
+    md: $md,
+    lg: $lg,
+    xl: $xl,
+);
+
+$container-max-widths: (
+    xsm: $xsm - $space,
+    sm: $sm - $space,
+    smd: $smd - $space,
+    md: $md - $space,
+    lg: $lg - $space,
+    xl: $xl - $space,
+);
+
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
+@import '../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+@import '../../node_modules/bootstrap/scss/utilities';
