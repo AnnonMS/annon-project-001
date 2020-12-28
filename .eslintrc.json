@@ -1,0 +1,63 @@
+{
+    "root": true,
+    "ignorePatterns": ["projects/**/*"],
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "parserOptions": {
+                "project": ["tsconfig.json", "e2e/tsconfig.json"],
+                "createDefaultProgram": true
+            },
+            "plugins": ["functional"],
+            "extends": [
+                "plugin:functional/no-mutations",
+                "plugin:@angular-eslint/ng-cli-compat",
+                "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "rules": {
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "app",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "app",
+                        "style": "camelCase"
+                    }
+                ],
+                "max-lines": ["error", { "max": 250, "skipComments": true }],
+                "max-lines-per-function": ["warn", { "max": 50 }],
+                "no-console": "warn",
+                "no-debugger": "warn",
+                "complexity": ["error", { "max": 50 }],
+                "functional/no-class": "off",
+                "functional/prefer-readonly-type": ["warn", { "ignoreClass": true }],
+                "functional/no-let": "error",
+                "prefer-const": "warn",
+                "no-shadow": "off",
+                "@typescript-eslint/no-shadow": ["error"]
+            }
+        },
+        {
+            "files": ["*.spec.ts", "*.e2e-spec.ts"],
+            "rules": {
+                "functional/no-let": "off",
+                "functional/immutable-data": "off",
+                "max-lines-per-function": "off",
+                "max-lines": "off"
+            }
+        },
+        {
+            "files": ["*.html"],
+            "extends": ["plugin:@angular-eslint/template/recommended"],
+            "rules": {}
+        }
+    ]
+}
