@@ -1,0 +1,9 @@
+.players-row {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+
+    &--hidden {
+        pointer-events: none;
+        opacity: 0;
+    }
+}
