@@ -1,5 +1,5 @@
 import { DARTH_VADER_MOCK, MILLENNIUM_FALCON } from '@mocks/resource.mock';
-import { isPeopleResource, isStartShipResource } from './types-guards';
+import { isPeopleResource, isStartShipResource } from './game-types.guards';
 
 describe('isStartShipResource', () => {
     it('should correctly detect its not a starship type', () => {

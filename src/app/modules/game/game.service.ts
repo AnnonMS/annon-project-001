@@ -4,7 +4,7 @@ import { ResourceURL } from '@app/common';
 import * as R from 'ramda';
 import { ResourceType } from '.';
 import { ApiResource, ApiResourceResponse } from './models';
-import { isPeopleResource } from './types-guards';
+import { isPeopleResource } from './types';
 
 @Injectable({
     providedIn: 'root',
