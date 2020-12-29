@@ -1,0 +1,17 @@
+<mat-card class="card mat-elevation-z0">
+    <mat-card-header class="card__header" [ngClass]="{ 'card__header--visible': isRoundFinished }">
+        <mat-card-title>{{ title }}</mat-card-title>
+        <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card__content">
+        <ng-template #buttonTemplate>
+            <mat-icon class="card__icon" [style.color]="iconColor">{{ icon }}</mat-icon>
+        </ng-template>
+
+        <app-shadow-circle [isActive]="!card.resource" (action)="onPickCard()" [buttonTemplate]="buttonTemplate">
+        </app-shadow-circle>
+    </mat-card-content>
+    <mat-card-footer class="card__footer">
+        <p class="card__state-message">{{ stateMessage }}</p>
+    </mat-card-footer>
+</mat-card>

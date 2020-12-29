@@ -1,0 +1,29 @@
+@import 'variables';
+
+.cards {
+    position: relative;
+
+    &__col {
+        margin: 10rem 0;
+
+        @media screen and (min-width: $sm) {
+            margin: 0;
+        }
+    }
+
+    &__new-game {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+
+        &__wrap {
+            pointer-events: initial;
+        }
+    }
+}
