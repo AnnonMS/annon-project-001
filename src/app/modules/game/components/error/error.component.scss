@@ -1,0 +1,15 @@
+@import 'variables';
+
+.error {
+    padding: 3rem;
+    text-transform: lowercase;
+    font-size: 2rem;
+    color: var(--accent-color);
+    text-align: center;
+
+    &__action {
+        position: relative;
+        text-align: center;
+        padding: 5rem 0;
+    }
+}

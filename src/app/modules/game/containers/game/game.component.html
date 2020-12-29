@@ -1,0 +1,36 @@
+<ng-container *ngIf="gameState$ | async as gameState">
+    
+    <!-- LOADING STATE -->
+
+    <ng-container *ngIf="gameState.isLoading; else app">
+        <div class="h-100 center-row center-row--xy flex-column">
+            <ng-template #buttonTemplate>
+                <mat-spinner color="accent" [strokeWidth]="7" [diameter]="50"></mat-spinner>
+            </ng-template>
+
+            <app-shadow-circle [isActive]="false" [buttonTemplate]="buttonTemplate"></app-shadow-circle>
+            <p class="mt-5">Fetching data from API</p>
+        </div>
+    </ng-container>
+
+    <ng-template #app>
+
+        <!-- ERROR STATE -->
+
+        <ng-container *ngIf="gameState.error; else board">
+            <app-error [error]="gameState.error" (refresh)="onResetGame()"></app-error>
+        </ng-container>
+
+        <!-- GAME BOARD VIEW -->
+
+        <ng-template #board>
+            <app-game-board
+                [resourceType]="gameState.playingResourceType"
+                [resources]="gameState.resources"
+                (resetGame)="onResetGame()"
+            >
+            </app-game-board>
+        </ng-template>
+        
+    </ng-template>
+</ng-container>

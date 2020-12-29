@@ -1,0 +1,32 @@
+@import 'variables';
+
+.board {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+
+    &__header {
+        height: 6rem;
+        margin-top: 1rem;
+
+        &__btn {
+            height: 6rem;
+            border: 1px solid var(--border-color);
+            color: #777;
+        }
+    }
+
+    &__players {
+        margin-bottom: 2rem;
+    }
+
+    &__content {
+        width: 100%;
+        padding: 3rem 0;
+        margin-bottom: 0;
+
+        @media screen and (min-width: $md) {
+            margin-bottom: 7rem;
+        }
+    }
+}

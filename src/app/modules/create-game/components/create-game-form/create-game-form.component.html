@@ -1,0 +1,36 @@
+<form class="form" [formGroup]="gameFormGroup" (ngSubmit)="startGame()">
+    <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Choose resource to play against</mat-label>
+        <mat-select formControlName="playingResourceType" data-testid="select-resource">
+            <mat-option *ngFor="let item of playingResourceType" [value]="item">{{ item }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="d-block">
+        <mat-label>Mode</mat-label>
+        <mat-select formControlName="mode" data-testid="select-mode">
+            <mat-option *ngFor="let item of mode" [value]="item">{{ item }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="row players-row" [ngClass]="{ 'players-row--hidden': isSinglePlayerMode }">
+        <div class="col-6">
+            <mat-form-field class="d-block" appearance="outline">
+                <mat-label>Player 1</mat-label>
+                <input matInput formControlName="playerOne" data-testid="input-player-one" />
+                <mat-error *ngIf="!gameFormGroup.get('playerOne')?.valid">Field is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-form-field class="d-block" appearance="outline">
+                <mat-label>Player 2</mat-label>
+                <input matInput formControlName="playerTwo" data-testid="input-player-two" />
+                <mat-error *ngIf="!gameFormGroup.get('playerTwo')?.valid">Field is required</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <button mat-flat-button color="accent" class="button w-100 p-3 mt-3" type="submit" data-testid="button-start-game">
+        Play
+    </button>
+</form>
