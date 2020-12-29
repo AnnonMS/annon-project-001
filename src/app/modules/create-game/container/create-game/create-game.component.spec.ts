@@ -3,7 +3,7 @@ import { GameMode, GamePlayingResource, MultiPlayerGame, ResourceType, SinglePla
 import { Store } from '@ngxs/store';
 import { GameFetchResourceRequested, StartGame } from '@store/game/game.actions';
 import { GameStateModel } from '@store/game/game.state';
-import { PlayersSet } from '@store/player/player.actions';
+import { PlayersSet } from '@store/players/players.actions';
 import { CreateGameComponent } from './create-game.component';
 
 describe('CreateGameComponent', () => {
