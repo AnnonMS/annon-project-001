@@ -1,0 +1,8 @@
+<div class="circle" [ngClass]="{ 'circle--small': isSmall  }">
+    <div class="circle__shadow" [ngClass]="{ 'circle__shadow--inset': !isActive  }">
+        <button data-testid="shadow-circle-button" color="accent" class="button circle__button" type="button"
+            (click)="onButtonPress()" mat-button [disabled]="!isActive">
+            <ng-container *ngTemplateOutlet="buttonTemplate"></ng-container>
+        </button>
+    </div>
+</div>

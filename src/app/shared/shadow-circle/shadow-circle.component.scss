@@ -1,0 +1,70 @@
+@import 'variables';
+
+.circle {
+    padding: 5rem;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    user-select: none;
+    display: inline-flex;
+
+    &--small {
+        padding: 2rem;
+    }
+
+    &__shadow {
+        display: flex;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 rgba($color: #000000, $alpha: 0.2), 5px 5px 15px 1px rgba($color: #000000, $alpha: 0.2);
+        transition: box-shadow 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        width: 10rem;
+        height: 10rem;
+
+        @media screen and (min-width: $smd) {
+            width: 15rem;
+            height: 15rem;
+        }
+        @media screen and (min-width: $lg) {
+            width: 20rem;
+            height: 20rem;
+        }
+
+        .circle--small & {
+            width: 10rem;
+            height: 10rem;
+            box-shadow: inset 0 0 0 rgba($color: #000000, $alpha: 0.2),
+                3px 3px 6px 1px rgba($color: #000000, $alpha: 0.2);
+        }
+
+        &--inset {
+            box-shadow: inset 5px 5px 15px 1px rgba($color: #000000, $alpha: 0.2),
+                0 0 0 rgba($color: #000000, $alpha: 0.2);
+
+            .circle--small & {
+                box-shadow: inset 3px 3px 6px 1px rgba($color: #000000, $alpha: 0.2),
+                    0 0 0 rgba($color: #000000, $alpha: 0.2);
+            }
+        }
+    }
+
+    &__button {
+        border: none;
+        background-color: transparent;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+
+        // just override the default default square outline, and show it only when user navigate via keyboard;
+
+        outline: none;
+
+        &:focus-visible {
+            border: 2rem solid var(--accent-color);
+
+            .circle--small & {
+                border-width: 1rem;
+            }
+        }
+    }
+}
