@@ -1,41 +1,22 @@
 <div class="board">
-    <ng-container *ngIf="!isLoading; else loader">
-        <div class="board__header center-row center-row--xy">
-            <button
-                mat-button
-                color="secondary"
-                class="button board__header__btn"
-                type="button"
-                data-testid="reset-button"
-                (click)="onResetGame()"
-            >
-                <mat-icon>exit_to_app</mat-icon>
-                start new game
-            </button>
+    <div class="board__header center-row center-row--xy">
+        <button
+            mat-button
+            color="secondary"
+            class="button board__header__btn"
+            type="button"
+            data-testid="reset-button"
+            (click)="onResetGame()"
+        >
+            <mat-icon>exit_to_app</mat-icon>
+            start new game
+        </button>
+    </div>
+
+    <div class="container flex-grow-1 w-100 center-row center-row--xy">
+        <div class="board__content">
+            <app-players class="board__players"></app-players>
+            <app-cards class="board__cards" [resourceType]="resourceType" [resources]="resources"></app-cards>
         </div>
-
-        <div class="container flex-grow-1 w-100 center-row center-row--xy">
-            <ng-container *ngIf="error; else board">
-                <app-error [error]="error" (refresh)="onResetGame()"></app-error>
-            </ng-container>
-
-            <ng-template #board>
-                <div class="board__content">
-                    <app-players class="board__players"></app-players>
-                    <app-cards class="board__cards" [resourceType]="resourceType" [resources]="resources"></app-cards>
-                </div>
-            </ng-template>
-        </div>
-    </ng-container>
-
-    <ng-template #loader>
-        <div class="h-100 center-row center-row--xy flex-column">
-            <ng-template #buttonTemplate>
-                <mat-spinner color="accent" [strokeWidth]="7" [diameter]="50"></mat-spinner>
-            </ng-template>
-
-            <app-shadow-circle [isActive]="false" [buttonTemplate]="buttonTemplate"></app-shadow-circle>
-            <p class="mt-5">Fetching data from API</p>
-        </div>
-    </ng-template>
+    </div>
 </div>

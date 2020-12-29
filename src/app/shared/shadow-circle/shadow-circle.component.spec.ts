@@ -5,7 +5,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatRippleModule } from '@angular/material/core';
 import { ShadowCircleComponent } from './shadow-circle.component';
 
-fdescribe('ShadowCircleComponent', () => {
+describe('ShadowCircleComponent', () => {
     let component: ShadowCircleComponent;
     let fixture: ComponentFixture<ShadowCircleComponent>;
     let loader: HarnessLoader;

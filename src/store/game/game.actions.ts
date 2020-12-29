@@ -15,6 +15,10 @@ export class GameFetchResourceRequested {
     constructor(public resourceType: ResourceType) {}
 }
 
+export class GetRequiredResources {
+    public static readonly type = '[Game] Get requested resource';
+}
+
 export class GameFetchResourceSucceeded {
     public static readonly type = '[Game] Fetch resource succeeded';
     constructor(public payload: { resource: readonly ApiResource[]; resourceType: ResourceType }) {}

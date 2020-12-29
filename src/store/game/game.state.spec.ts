@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { DARTH_VADER_MOCK, mockPeopleResource, mockStarShipResource } from '@app/modules/card/mocks/resource.mock';
 import { GameMode, GamePlayingResource, ResourceType, SinglePlayerGame } from '@app/modules/game';
 import { GameService } from '@app/modules/game/game.service';
+import { DARTH_VADER_MOCK, mockPeopleResource, mockStarShipResource } from '@mocks/resource.mock';
 import { NgxsModule, Store } from '@ngxs/store';
 import { RootState } from '@store/store.config';
 import {

@@ -1,4 +1,4 @@
-export * from './guards';
-export * from './types';
-export * from './models';
 export * from './game.service';
+export * from './models';
+export * from './types';
+export * from './types-guards';

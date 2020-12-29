@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { ResourceURL } from '@app/common';
 import * as R from 'ramda';
 import { ResourceType } from '.';
-import { isPeopleResource } from './guards';
 import { ApiResource, ApiResourceResponse } from './models';
+import { isPeopleResource } from './types-guards';
 
 @Injectable({
     providedIn: 'root',
