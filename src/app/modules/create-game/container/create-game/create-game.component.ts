@@ -6,7 +6,6 @@ import { PlayersSet } from '@store/player/player.actions';
 
 @Component({
     templateUrl: './create-game.component.html',
-    styleUrls: ['./create-game.component.scss'],
 })
 export class CreateGameComponent {
     constructor(private store: Store) {}
