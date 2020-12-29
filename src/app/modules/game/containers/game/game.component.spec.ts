@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Store } from '@ngxs/store';
 import { ResetGame } from '@store/game/game.actions';
-import { PlayersClear } from '@store/player/player.actions';
+import { ClearPlayers } from '@store/players/players.actions';
 import { NgxsStoreModule } from '@store/store.module';
 import { GameModule } from '../../game.module';
 import { GameComponent } from './game.component';
@@ -27,7 +27,7 @@ describe('GameComponent', () => {
     });
 
     it('onResetGame', () => {
-        spyOn(store, 'dispatch').withArgs([new ResetGame(), new PlayersClear()]);
+        spyOn(store, 'dispatch').withArgs([new ResetGame(), new ClearPlayers()]);
         component.onResetGame();
         // the store action itself are tested in src/store modules
         expect(store.dispatch).toHaveBeenCalled();

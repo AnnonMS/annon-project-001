@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { GetRequiredResources, ResetGame } from '@store/game/game.actions';
 import { GameState, GameStateModel } from '@store/game/game.state';
-import { PlayersClear } from '@store/player/player.actions';
+import { ClearPlayers } from '@store/players/players.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,6 +19,6 @@ export class GameComponent implements OnInit {
     }
 
     onResetGame() {
-        this.store.dispatch([new ResetGame(), new PlayersClear()]);
+        this.store.dispatch([new ResetGame(), new ClearPlayers()]);
     }
 }

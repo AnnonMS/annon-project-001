@@ -3,12 +3,12 @@ import { NgxsLoggerPluginOptions } from '@ngxs/logger-plugin/src/symbols';
 import { NgxsConfig } from '@ngxs/store/src/symbols';
 import { CardsState, CardsStateModel } from './cards/cards.state';
 import { GameState, GameStateModel } from './game/game.state';
-import { PlayerState, PlayerStateModel } from './player/player.state';
+import { PlayersStateModel, PlayerState } from './players/players.state';
 
 export type RootState = {
     readonly cards: CardsStateModel;
     readonly game: GameStateModel;
-    readonly player: PlayerStateModel;
+    readonly players: PlayersStateModel;
 };
 
 export const STATES_MODULES = [GameState, PlayerState, CardsState];

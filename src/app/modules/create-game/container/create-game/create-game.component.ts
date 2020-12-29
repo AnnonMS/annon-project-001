@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Game, isMultiPlayerGame } from '@app/modules/game';
 import { Store } from '@ngxs/store';
 import { StartGame } from '@store/game/game.actions';
-import { PlayersSet } from '@store/player/player.actions';
+import { PlayersSet } from '@store/players/players.actions';
 
 @Component({
     templateUrl: './create-game.component.html',

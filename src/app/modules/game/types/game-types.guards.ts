@@ -1,5 +1,5 @@
-import { ApiResource, People, StarShip } from './models';
-import { Game, GameMode, MultiPlayerGame, SinglePlayerGame } from './types';
+import { ApiResource, People, StarShip } from '../models';
+import { Game, GameMode, MultiPlayerGame, SinglePlayerGame } from './game.types';
 
 export const isSinglePlayerGame = (game: Game): game is SinglePlayerGame => game.mode === GameMode.SINGLE_PLAYER;
 export const isMultiPlayerGame = (game: Game): game is MultiPlayerGame => game.mode === GameMode.MULTI_PLAYER;
