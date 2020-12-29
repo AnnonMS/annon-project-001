@@ -55,6 +55,21 @@
         height: 100%;
         width: 100%;
 
+        ::ng-deep .mat-icon {
+            height: auto;
+            width: auto;
+            font-size: 5rem;
+            color: var(--accent-color);
+
+            @media screen and (min-width: $smd) {
+                font-size: 7rem;
+            }
+
+            .circle--small & {
+                font-size: 5rem;
+            }
+        }
+
         // just override the default default square outline, and show it only when user navigate via keyboard;
 
         outline: none;
