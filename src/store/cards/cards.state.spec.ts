@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Card, PlayerInternalState } from '@app/modules/card';
+import { Card, RoundState } from '@app/modules/card';
 import { DARTH_VADER_MOCK } from '@mocks/resource.mock';
 import { NgxsModule, Store } from '@ngxs/store';
 import { RootState } from '@store/store.config';
@@ -21,15 +21,15 @@ describe('Cards store', () => {
         const state: RootState = {
             ...store.snapshot(),
             cards: [
-                { id: '001', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: null },
-                { id: '002', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: null },
+                { id: '001', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: null },
+                { id: '002', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: null },
             ],
         };
         store.reset(state);
 
         const expected: readonly Card[] = [
-            { id: '001', state: PlayerInternalState.PENDING, resource: DARTH_VADER_MOCK },
-            { id: '002', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: DARTH_VADER_MOCK },
+            { id: '001', roundState: RoundState.PENDING, resource: DARTH_VADER_MOCK },
+            { id: '002', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: DARTH_VADER_MOCK },
         ];
 
         store.dispatch(new CardsUpdate(expected));
@@ -41,15 +41,15 @@ describe('Cards store', () => {
         const state: RootState = {
             ...store.snapshot(),
             cards: [
-                { id: '001', state: PlayerInternalState.PENDING, resource: DARTH_VADER_MOCK },
-                { id: '002', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: DARTH_VADER_MOCK },
+                { id: '001', roundState: RoundState.PENDING, resource: DARTH_VADER_MOCK },
+                { id: '002', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: DARTH_VADER_MOCK },
             ],
         };
         store.reset(state);
 
         const expected: readonly Card[] = [
-            { id: '001', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: null },
-            { id: '002', state: PlayerInternalState.WAITING_FOR_USER_ACTION, resource: null },
+            { id: '001', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: null },
+            { id: '002', roundState: RoundState.WAITING_FOR_USER_ACTION, resource: null },
         ];
 
         store.dispatch(new CardReset());

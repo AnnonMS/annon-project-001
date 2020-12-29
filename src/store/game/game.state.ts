@@ -27,7 +27,7 @@ export type GameStateModel = {
     readonly error: HttpErrorResponse | null;
 };
 
-export const initialGameState: GameStateModel = {
+const initialState: GameStateModel = {
     isPlaying: false,
     isLoading: false,
     resources: {
@@ -40,7 +40,7 @@ export const initialGameState: GameStateModel = {
 };
 @State<GameStateModel>({
     name: 'game',
-    defaults: initialGameState,
+    defaults: initialState,
 })
 @Injectable()
 export class GameState {

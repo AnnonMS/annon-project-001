@@ -13,7 +13,7 @@ import {
     ResetGame,
     StartGame,
 } from './game.actions';
-import { GameState, GameStateModel, initialGameState } from './game.state';
+import { GameState, GameStateModel } from './game.state';
 
 describe('Game store', () => {
     let store: Store;
@@ -28,8 +28,15 @@ describe('Game store', () => {
     });
 
     it('should dispatch an "StartGame" action and start a game with form settings', () => {
-        const state: RootState = { ...store.snapshot(), game: { ...initialGameState, isPlaying: false } };
-
+        const state: RootState = {
+            ...store.snapshot(),
+            game: {
+                ...store.snapshot().game,
+                isPlaying: false,
+                mode: GameMode.MULTI_PLAYER,
+                playingResourceType: GamePlayingResource.STARSHIP,
+            },
+        };
         store.reset(state);
 
         const game: SinglePlayerGame = {
@@ -38,7 +45,7 @@ describe('Game store', () => {
         };
 
         const expected: GameStateModel = {
-            ...initialGameState,
+            ...state.game,
             isPlaying: true,
             mode: GameMode.SINGLE_PLAYER,
             playingResourceType: GamePlayingResource.PERSON,
@@ -50,13 +57,9 @@ describe('Game store', () => {
     });
 
     it('should dispatch an "ResetGame" action to change playing state to false', () => {
-        const state: RootState = { ...store.snapshot(), game: { ...initialGameState, isPlaying: true } };
+        const state: RootState = { ...store.snapshot(), game: { ...store.snapshot().game, isPlaying: true } };
         store.reset(state);
-
-        const expected: GameStateModel = {
-            ...initialGameState,
-            isPlaying: false,
-        };
+        const expected: GameStateModel = { ...state.game, isPlaying: false };
 
         store.dispatch(new ResetGame());
         const actual = store.selectSnapshot(GameState.getState);

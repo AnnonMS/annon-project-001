@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngxs/store';
 import { ResetGame } from '@store/game/game.actions';
 import { ClearPlayers } from '@store/players/players.actions';
@@ -15,7 +16,7 @@ describe('GameComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GameComponent],
-            imports: [GameModule, NgxsStoreModule, BrowserAnimationsModule],
+            imports: [GameModule, NgxsStoreModule, BrowserAnimationsModule, RouterTestingModule],
         }).compileComponents();
         store = TestBed.inject(Store);
     });

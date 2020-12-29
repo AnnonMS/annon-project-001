@@ -46,14 +46,13 @@ describe('Player store', () => {
         it('should correctly update the score when players are set (multi player mode)', () => {
             const state: RootState = {
                 ...store.snapshot(),
-                player: [
+                players: [
                     { name: 'Foo', score: 0 },
                     { name: 'Bar', score: 0 },
                 ],
             };
 
             store.reset(state);
-
             store.dispatch(new PlayerUpdateScore(1));
 
             const actual = store.selectSnapshot(PlayerState.getState);
@@ -68,7 +67,7 @@ describe('Player store', () => {
         it('should skip the score update when there were no players (single player mode)', () => {
             const state: RootState = {
                 ...store.snapshot(),
-                player: [],
+                players: [],
             };
 
             store.reset(state);
