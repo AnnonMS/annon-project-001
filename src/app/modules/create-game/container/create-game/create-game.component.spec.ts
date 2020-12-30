@@ -1,10 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from '@app/material/material.module';
 import { GameMode, GamePlayingResource, MultiPlayerGame, SinglePlayerGame } from '@app/modules/game';
 import { Store } from '@ngxs/store';
 import { StartGame } from '@store/game/game.actions';
 import { PlayersSet } from '@store/players/players.actions';
 import { NgxsStoreModule } from '@store/store.module';
+import { CreateGameFormComponent } from '../../components/create-game-form/create-game-form.component';
 import { CreateGameComponent } from './create-game.component';
 
 describe('CreateGameComponent', () => {
@@ -14,8 +18,14 @@ describe('CreateGameComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CreateGameComponent],
-            imports: [NgxsStoreModule, RouterTestingModule],
+            declarations: [CreateGameComponent, CreateGameFormComponent],
+            imports: [
+                NgxsStoreModule,
+                RouterTestingModule,
+                MaterialModule,
+                ReactiveFormsModule,
+                BrowserAnimationsModule,
+            ],
         }).compileComponents();
         store = TestBed.inject(Store);
     });

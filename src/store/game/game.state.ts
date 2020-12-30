@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameMode, GamePlayingResource, GameService, People, ResourceType, StarShip } from '@app/modules/game';
+import { GameMode, GamePlayingResource, GameService, People, StarShip } from '@app/modules/game';
 import { Navigate } from '@ngxs/router-plugin';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import * as R from 'ramda';
@@ -8,7 +8,6 @@ import {
     GameFetchResourceFailed,
     GameFetchResourceRequested,
     GameFetchResourceSucceeded,
-    GetRequiredResources,
     ResetGame,
     StartGame,
 } from './game.actions';
@@ -101,26 +100,5 @@ export class GameState {
     @Action(GameFetchResourceFailed)
     public fetchResourceFailed({ patchState }: StateContext<GameStateModel>, { error }: GameFetchResourceFailed) {
         patchState({ error, isLoading: false });
-    }
-
-    @Action(GetRequiredResources)
-    public getRequiredResources({ dispatch, getState }: StateContext<GameStateModel>) {
-        const { playingResourceType, resources } = getState();
-
-        const isRandomMode = playingResourceType === GamePlayingResource.RANDOM;
-        const isPeopleResourceRequired = playingResourceType === GamePlayingResource.PERSON || isRandomMode;
-        const isStarShipResourceRequired = playingResourceType === GamePlayingResource.STARSHIP || isRandomMode;
-        const { people, starships } = resources;
-
-        // Only make the request when there is no resources already stored for the particular resource in local storage
-        // as (ngxs/storage-plugin is keeping it with syncs with our state)
-
-        if (isPeopleResourceRequired && !people.length) {
-            dispatch(new GameFetchResourceRequested(ResourceType.PEOPLE));
-        }
-
-        if (isStarShipResourceRequired && !starships.length) {
-            dispatch(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
-        }
     }
 }
