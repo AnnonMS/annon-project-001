@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -8,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorComponent {
-    @Input() error!: HttpErrorResponse;
+    @Input() error!: string;
     @Output() refresh = new EventEmitter<void>();
 
     onResetGame() {

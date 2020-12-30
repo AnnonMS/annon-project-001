@@ -30,7 +30,7 @@ export class GameService {
             const aggregatedResources = [...resources, ...pageResources];
 
             if (next !== null) {
-                // return aggregate(next, aggregatedResources);
+                return aggregate(next, aggregatedResources);
             }
 
             return aggregatedResources;
@@ -40,12 +40,15 @@ export class GameService {
     }
 
     getPageResource(url: ResourceURL) {
-        return this.http
-            .get<ApiResourceResponse>(url)
-            .pipe(
-                catchError((error: HttpErrorResponse) =>
-                    throwError(`Error retrieving the data. ${error.statusText || 'Unknown'}`),
-                ),
-            );
+        return this.http.get<ApiResourceResponse>(url).pipe(
+            catchError((e: HttpErrorResponse) => {
+                const error = new Error(
+                    `Something went wrong and we couldn't fetch the data from the ${url}, statusCode: ${
+                        e.statusText || 'unknown'
+                    } `,
+                );
+                return throwError(error);
+            }),
+        );
     }
 }

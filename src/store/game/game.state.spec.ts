@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { GameMode, GamePlayingResource, ResourceType, SinglePlayerGame } from '@app/modules/game';
@@ -76,21 +75,7 @@ describe('Game store', () => {
     });
 
     it('should dispatch an "FetchResourceFailed" action to set an error message', () => {
-        const error = new HttpErrorResponse({
-            error: {
-                headers: {},
-                status: 0,
-                statusText: 'Unknown Error',
-                url: 'https://swapiZ.dev/api/people',
-                ok: false,
-                name: 'HttpErrorResponse',
-                message: 'Http failure response for https://swapi.dev/api/people',
-                error: {
-                    isTrusted: true,
-                },
-            },
-        });
-
+        const error = 'Http failure response for https://swapi.dev/api/people';
         store.dispatch(new GameFetchResourceFailed(error));
         const actual = store.selectSnapshot(GameState.getState).error;
         expect(actual).toEqual(error);

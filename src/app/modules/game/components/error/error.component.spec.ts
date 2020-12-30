@@ -1,6 +1,5 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MaterialModule } from '@app/material/material.module';
@@ -31,20 +30,7 @@ describe('ErrorComponent', () => {
     });
 
     it('should emit event on button click', async () => {
-        component.error = new HttpErrorResponse({
-            error: {
-                headers: {},
-                status: 0,
-                statusText: 'Unknown Error',
-                url: 'https://swapiZ.dev/api/people',
-                ok: false,
-                name: 'HttpErrorResponse',
-                message: 'Http failure response for https://swapiZ.dev/api/people: 0 Unknown Error',
-                error: {
-                    isTrusted: true,
-                },
-            },
-        });
+        component.error = 'Http failure response for https://swapiZ.dev/api/people: 0 Unknown Error';
 
         const buttonHarness = await loader.getHarness(
             MatButtonHarness.with({ selector: '[data-testid="shadow-circle-button"' }),

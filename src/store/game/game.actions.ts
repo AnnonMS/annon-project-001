@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResource, Game, ResourceType } from '@app/modules/game';
 
 export class StartGame {
@@ -22,5 +21,5 @@ export class GameFetchResourceSucceeded {
 
 export class GameFetchResourceFailed {
     public static readonly type = '[Game] Fetch resource failed';
-    constructor(public error: HttpErrorResponse) {}
+    constructor(public error: string) {}
 }

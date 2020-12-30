@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameMode, GamePlayingResource, GameService, People, StarShip } from '@app/modules/game';
 import { Navigate } from '@ngxs/router-plugin';
@@ -23,7 +22,7 @@ export type GameStateModel = {
     readonly playingResourceType: GamePlayingResource;
     readonly resources: GameStateResources;
     readonly mode: GameMode;
-    readonly error: HttpErrorResponse | null;
+    readonly error: string | null;
 };
 
 const initialState: GameStateModel = {
@@ -80,7 +79,7 @@ export class GameState {
         this.gameService
             .fetchResources(resourceType)
             .then((resource) => dispatch(new GameFetchResourceSucceeded({ resource, resourceType })))
-            .catch((error: HttpErrorResponse) => dispatch(new GameFetchResourceFailed(error)));
+            .catch((error: string) => dispatch(new GameFetchResourceFailed(error)));
     }
 
     @Action(GameFetchResourceSucceeded)

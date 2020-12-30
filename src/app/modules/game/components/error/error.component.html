@@ -1,12 +1,13 @@
-<div class="error">
-    <p class="error__status">{{ error?.statusText }}</p>
-    <div class="error__action">
-        <ng-template #buttonTemplate>
-            <mat-icon color="warn">exit_to_app</mat-icon>
-        </ng-template>
+<div class="h-100 center-row center-row--xy">
+    <div class="error">
+        <div class="error__action">
+            <ng-template #buttonTemplate>
+                <mat-icon color="warn">exit_to_app</mat-icon>
+            </ng-template>
 
-        <app-shadow-circle [isActive]="true" [buttonTemplate]="buttonTemplate" (action)="onResetGame()">
-        </app-shadow-circle>
+            <app-shadow-circle [isActive]="true" [buttonTemplate]="buttonTemplate" (action)="onResetGame()">
+            </app-shadow-circle>
+        </div>
+        <p class="error__message">{{ error }}</p>
     </div>
-    <p class="error__message">{{ error?.message }}</p>
 </div>

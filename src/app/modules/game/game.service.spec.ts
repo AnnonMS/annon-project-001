@@ -40,14 +40,13 @@ describe('GameService', () => {
 
         const req = httpMock.expectOne(`${service.api}/people`);
         expect(req.request.method).toEqual('GET');
-
         req.flush(mockPeopleResourceApiResponse);
     });
 
     it('should retrieve starships resources from API via GET method', (done) => {
         const mockStarshipsResourceApiResponse: ApiResourceResponse = {
             count: 10,
-            next: 'http://swapi.dev/api/starships/?page=2',
+            next: null,
             previous: null,
             results: mockStarShipResource,
         };
