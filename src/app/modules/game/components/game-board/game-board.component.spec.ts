@@ -1,5 +1,6 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +18,14 @@ describe('GameBoardComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GameBoardComponent],
-            imports: [PlayerModule, CardModule, MatIconModule, NgxsStoreModule, RouterTestingModule],
+            imports: [
+                PlayerModule,
+                CardModule,
+                MatIconModule,
+                NgxsStoreModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
         }).compileComponents();
     });
 

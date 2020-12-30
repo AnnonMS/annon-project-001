@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { ResourceType } from '@app/modules/game';
 import { mockPeopleResource, mockStarShipResource } from '@mocks/resource.mock';
 import { GameService } from './game.service';
 import { ApiResourceResponse } from './models';
+import { ResourceType } from './types/game.types';
 
 describe('GameService', () => {
     let service: GameService;
@@ -12,22 +12,19 @@ describe('GameService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            providers: [GameService],
             imports: [HttpClientTestingModule],
         });
 
-        service = TestBed.inject(GameService);
         httpMock = TestBed.inject(HttpTestingController);
+        service = TestBed.inject(GameService);
     });
 
     afterEach(() => {
         httpMock.verify();
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
-
-    it('should make a correct call to the API for people resources', () => {
+    it('should retrieve people resources from API via GET method', (done) => {
         const mockPeopleResourceApiResponse: ApiResourceResponse = {
             count: 9,
             next: null,
@@ -35,20 +32,19 @@ describe('GameService', () => {
             results: mockPeopleResource,
         };
 
-        const expected = mockPeopleResource;
-
         service.fetchResources(ResourceType.PEOPLE).then((res) => {
-            expect(res).toEqual(expected), fail;
+            expect(res).toEqual(mockPeopleResource), fail;
             expect(res.length).toEqual(mockPeopleResourceApiResponse.count), fail;
+            done();
         });
 
-        const req = httpMock.expectOne((request) => request.url === `https://swapi.dev/api/people`);
+        const req = httpMock.expectOne(`${service.api}/people`);
         expect(req.request.method).toEqual('GET');
 
         req.flush(mockPeopleResourceApiResponse);
     });
 
-    it('should make a correct call to the API for starship resources', () => {
+    it('should retrieve starships resources from API via GET method', (done) => {
         const mockStarshipsResourceApiResponse: ApiResourceResponse = {
             count: 10,
             next: 'http://swapi.dev/api/starships/?page=2',
@@ -56,16 +52,13 @@ describe('GameService', () => {
             results: mockStarShipResource,
         };
 
-        const expected = mockStarShipResource;
-
         service.fetchResources(ResourceType.STAR_SHIPS).then((res) => {
-            expect(res).toEqual(expected), fail;
-            expect(res.length).toEqual(20), fail;
+            expect(res).toEqual(mockStarShipResource), fail;
+            expect(res.length).toEqual(mockStarshipsResourceApiResponse.count), fail;
+            done();
         });
 
-        const URL = 'https://swapi.dev/api/starships';
-
-        const req = httpMock.expectOne((request) => request.url === URL);
+        const req = httpMock.expectOne(`${service.api}/starships`);
         expect(req.request.method).toEqual('GET');
 
         req.flush(mockStarshipsResourceApiResponse);

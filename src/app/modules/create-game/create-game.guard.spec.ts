@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Navigate } from '@ngxs/router-plugin';
@@ -12,14 +13,10 @@ describe('CreateGameGuard', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [NgxsStoreModule, RouterTestingModule],
+            imports: [NgxsStoreModule, RouterTestingModule, HttpClientTestingModule],
         });
         guard = TestBed.inject(CreateGameGuard);
         store = TestBed.inject(Store);
-    });
-
-    it('should be created', () => {
-        expect(guard.canActivate()).toBeTruthy();
     });
 
     it('should grants route access', () => {

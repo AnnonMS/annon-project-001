@@ -1,5 +1,6 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonHarness } from '@angular/material/button/testing';
@@ -18,7 +19,7 @@ describe('CreateGameFormComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [CreateGameFormComponent],
-            imports: [ReactiveFormsModule, MaterialModule, BrowserAnimationsModule],
+            imports: [ReactiveFormsModule, MaterialModule, BrowserAnimationsModule, HttpClientTestingModule],
         }).compileComponents();
     });
 

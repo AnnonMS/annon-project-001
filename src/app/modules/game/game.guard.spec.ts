@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Navigate } from '@ngxs/router-plugin';
@@ -12,7 +13,7 @@ describe('GameGuard', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [NgxsStoreModule, RouterTestingModule],
+            imports: [NgxsStoreModule, RouterTestingModule, HttpClientTestingModule],
         });
         guard = TestBed.inject(GameGuard);
         store = TestBed.inject(Store);

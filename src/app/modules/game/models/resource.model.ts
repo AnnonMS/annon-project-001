@@ -1,5 +1,5 @@
-import { People } from './People';
-import { StarShip } from './Starship';
+import { People } from './people.model';
+import { StarShip } from './starship.model';
 
 export type ApiResource = People | StarShip;
 

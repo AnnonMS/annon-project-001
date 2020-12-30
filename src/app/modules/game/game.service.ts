@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResourceURL } from '@app/common';
 import * as R from 'ramda';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ResourceType } from '.';
 import { ApiResource, ApiResourceResponse } from './models';
 import { isPeopleResource } from './types';
@@ -10,7 +12,7 @@ import { isPeopleResource } from './types';
     providedIn: 'root',
 })
 export class GameService {
-    private baseURL = 'https://swapi.dev/api';
+    api = 'https://swapi.dev/api';
 
     constructor(private http: HttpClient) {}
 
@@ -22,22 +24,28 @@ export class GameService {
             url: ResourceURL,
             resources: readonly ApiResource[] = [],
         ): Promise<readonly ApiResource[]> => {
-            const { results, next } = await this.getPageResource(url);
+            const { results, next } = await this.getPageResource(url).toPromise();
 
             const pageResources = R.reject(isValueUnknown, results);
             const aggregatedResources = [...resources, ...pageResources];
 
             if (next !== null) {
-                return aggregate(next, aggregatedResources);
+                // return aggregate(next, aggregatedResources);
             }
 
             return aggregatedResources;
         };
 
-        return aggregate(`${this.baseURL}/${resourceType}`);
+        return aggregate(`${this.api}/${resourceType}`);
     }
 
-    private getPageResource(url: ResourceURL): Promise<ApiResourceResponse> {
-        return this.http.get<ApiResourceResponse>(url).toPromise();
+    getPageResource(url: ResourceURL) {
+        return this.http
+            .get<ApiResourceResponse>(url)
+            .pipe(
+                catchError((error: HttpErrorResponse) =>
+                    throwError(`Error retrieving the data. ${error.statusText || 'Unknown'}`),
+                ),
+            );
     }
 }
