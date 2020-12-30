@@ -1,13 +1,9 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { GamePlayingResource } from '@app/modules/game';
+import { Component, OnDestroy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { CardReset, CardsUpdate } from '@store/cards/cards.actions';
+import { CardReset, GetRandomResource } from '@store/cards/cards.actions';
 import { CardsState, CardsStateModel } from '@store/cards/cards.state';
-import { GameStateResources } from '@store/game/game.state';
-import { PlayerUpdateScore } from '@store/players/players.actions';
 import { Observable } from 'rxjs';
-import { Card, RoundState } from '../..';
-import { CardsService } from '../../cards.service';
+import { Card } from '../..';
 
 @Component({
     selector: 'app-cards',
@@ -16,10 +12,8 @@ import { CardsService } from '../../cards.service';
 })
 export class CardsComponent implements OnDestroy {
     @Select(CardsState.getState) cardsState$!: Observable<CardsStateModel>;
-    @Input() resourceType!: GamePlayingResource;
-    @Input() resources!: GameStateResources;
 
-    constructor(private store: Store, private cardService: CardsService) {}
+    constructor(private store: Store) {}
 
     ngOnDestroy() {
         this.resetCards();
@@ -27,18 +21,6 @@ export class CardsComponent implements OnDestroy {
 
     resetCards() {
         this.store.dispatch(new CardReset());
-    }
-
-    updateCardsState(cards: readonly Card[]) {
-        this.store.dispatch(new CardsUpdate(cards));
-    }
-
-    awardsWinner(cards: readonly Card[]) {
-        const winnerIndex = cards.findIndex(({ roundState }) => roundState === RoundState.WON);
-
-        if (winnerIndex !== -1) {
-            this.store.dispatch(new PlayerUpdateScore(winnerIndex));
-        }
     }
 
     isRoundFinished(cards: readonly Card[]): boolean {
@@ -49,10 +31,7 @@ export class CardsComponent implements OnDestroy {
         return card.id;
     }
 
-    pickRandomCard(index: number, cards: readonly Card[]): void {
-        const randomCard = this.cardService.pickRandomCard(this.resources, this.resourceType, index, cards);
-        const updatedCards = this.cardService.updatedCards(index, cards, randomCard);
-        this.updateCardsState(updatedCards);
-        this.awardsWinner(updatedCards);
+    pickRandomResource(index: number): void {
+        this.store.dispatch(new GetRandomResource(index));
     }
 }
