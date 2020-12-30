@@ -7,3 +7,8 @@ export class CardsUpdate {
 export class CardReset {
     public static readonly type = '[Cards] Reset';
 }
+
+export class GetRandomResource {
+    public static readonly type = '[Cards] Get random resource';
+    constructor(public cardIndex: number) {}
+}

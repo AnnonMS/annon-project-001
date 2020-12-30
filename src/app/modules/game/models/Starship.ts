@@ -1,7 +1,7 @@
 // As the interface is reflecting the API response, it can't follow the recommended name convention
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { ResourceURL, StrNumber } from '@app/common/types';
+import { ResourceURL, StrNumber } from '@app/common';
 
 /**
  * A Starship resource is a single transport craft that has hyperdrive capability.

@@ -1,4 +1,4 @@
-import { ResourceURL, StrNumber } from '@app/common/types';
+import { ResourceURL, StrNumber } from '@app/common';
 
 // As the interface is reflecting the API response, it can't follow the recommended name convention on this place.
 /* eslint-disable @typescript-eslint/naming-convention */
