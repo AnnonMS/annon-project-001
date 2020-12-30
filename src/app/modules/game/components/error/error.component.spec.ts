@@ -3,6 +3,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { MaterialModule } from '@app/material/material.module';
 import { ShadowCircleComponent } from '@app/shared/shadow-circle/shadow-circle.component';
 import { ErrorComponent } from './error.component';
 
@@ -14,6 +15,7 @@ describe('ErrorComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [ErrorComponent, ShadowCircleComponent],
+            imports: [MaterialModule],
         }).compileComponents();
     });
 

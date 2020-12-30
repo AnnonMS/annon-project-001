@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NgxsStoreModule } from '@store/store.module';
 import { AppComponent } from './app.component';
-import { GameModule } from './modules';
+import { GameModule } from './modules/game/game.module';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [AppComponent],
-            imports: [GameModule, NgxsStoreModule],
+            imports: [GameModule, NgxsStoreModule, RouterTestingModule],
         }).compileComponents();
     });
 

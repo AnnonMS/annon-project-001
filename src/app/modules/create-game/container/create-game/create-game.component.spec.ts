@@ -1,9 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GameMode, GamePlayingResource, MultiPlayerGame, ResourceType, SinglePlayerGame } from '@app/modules/game';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from '@app/material/material.module';
+import { GameMode, GamePlayingResource, MultiPlayerGame, SinglePlayerGame } from '@app/modules/game';
 import { Store } from '@ngxs/store';
-import { GameFetchResourceRequested, StartGame } from '@store/game/game.actions';
-import { GameStateModel } from '@store/game/game.state';
+import { StartGame } from '@store/game/game.actions';
 import { PlayersSet } from '@store/players/players.actions';
+import { NgxsStoreModule } from '@store/store.module';
+import { CreateGameFormComponent } from '../../components/create-game-form/create-game-form.component';
 import { CreateGameComponent } from './create-game.component';
 
 describe('CreateGameComponent', () => {
@@ -13,7 +18,14 @@ describe('CreateGameComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [CreateGameComponent],
+            declarations: [CreateGameComponent, CreateGameFormComponent],
+            imports: [
+                NgxsStoreModule,
+                RouterTestingModule,
+                MaterialModule,
+                ReactiveFormsModule,
+                BrowserAnimationsModule,
+            ],
         }).compileComponents();
         store = TestBed.inject(Store);
     });
@@ -29,19 +41,7 @@ describe('CreateGameComponent', () => {
     });
 
     describe('#startGame', () => {
-        const gameState: GameStateModel = {
-            isPlaying: true,
-            isLoading: false,
-            resources: {
-                people: [],
-                starships: [],
-            },
-            error: null,
-            mode: GameMode.MULTI_PLAYER,
-            playingResourceType: GamePlayingResource.RANDOM,
-        };
-
-        it('should start a single player game and fetch only API resources for people', () => {
+        it('should start a single player', () => {
             spyOn(store, 'dispatch');
             const game: SinglePlayerGame = {
                 mode: GameMode.SINGLE_PLAYER,
@@ -49,47 +49,9 @@ describe('CreateGameComponent', () => {
             };
             component.startGame(game);
             expect(store.dispatch).toHaveBeenCalledWith(new StartGame(game));
-            expect(store.dispatch).toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.PEOPLE));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
         });
 
-        it('should start a single player game and fetch only API resources for starships', () => {
-            spyOn(store, 'dispatch');
-            const game: SinglePlayerGame = {
-                mode: GameMode.SINGLE_PLAYER,
-                playingResourceType: GamePlayingResource.STARSHIP,
-            };
-            component.startGame(game);
-            expect(store.dispatch).toHaveBeenCalledWith(new StartGame(game));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.PEOPLE));
-            expect(store.dispatch).toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
-        });
-
-        it('should start a single player game with random mode and fetch both API resources for starships and people', () => {
-            spyOn(store, 'dispatch');
-            const game: SinglePlayerGame = {
-                mode: GameMode.SINGLE_PLAYER,
-                playingResourceType: GamePlayingResource.RANDOM,
-            };
-            component.startGame(game);
-            expect(store.dispatch).toHaveBeenCalledWith(new StartGame(game));
-            expect(store.dispatch).toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.PEOPLE));
-            expect(store.dispatch).toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
-        });
-
-        it('should start a single player game and not fetch anything as we already have the values in storage', () => {
-            spyOn(store, 'dispatch');
-            const game: SinglePlayerGame = {
-                mode: GameMode.SINGLE_PLAYER,
-                playingResourceType: GamePlayingResource.RANDOM,
-            };
-            component.startGame(game);
-            expect(store.dispatch).toHaveBeenCalledWith(new StartGame(game));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.PEOPLE));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
-        });
-
-        it('should start a multiplayer game and not fetch anything as we already have the values in storage', () => {
+        it('should start a multiplayer game', () => {
             spyOn(store, 'dispatch');
             const game: MultiPlayerGame = {
                 mode: GameMode.MULTI_PLAYER,
@@ -100,8 +62,6 @@ describe('CreateGameComponent', () => {
             component.startGame(game);
             expect(store.dispatch).toHaveBeenCalledWith(new StartGame(game));
             expect(store.dispatch).toHaveBeenCalledWith(new PlayersSet({ playerOneName: 'Foo', playerTwoName: 'Bar' }));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.PEOPLE));
-            expect(store.dispatch).not.toHaveBeenCalledWith(new GameFetchResourceRequested(ResourceType.STAR_SHIPS));
         });
     });
 });

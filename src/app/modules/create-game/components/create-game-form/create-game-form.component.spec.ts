@@ -91,9 +91,11 @@ describe('CreateGameFormComponent', () => {
             await selectHarness.clickOptions({ text: GameMode.SINGLE_PLAYER });
             expect(component.gameFormGroup.valid).toBeTruthy();
 
-            await selectHarness.open();
             await selectHarness.clickOptions({ text: GameMode.MULTI_PLAYER });
             expect(component.gameFormGroup.valid).toBeFalse();
+
+            await selectHarness.clickOptions({ text: GameMode.SINGLE_PLAYER });
+            expect(component.gameFormGroup.valid).toBeTruthy();
         });
     });
 

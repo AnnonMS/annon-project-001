@@ -1,0 +1,24 @@
+<div class="cards" *ngIf="cardsState$ | async as cards">
+    <div class="row cards__row">
+        <div class="col-sm-6 cards__col" *ngFor="let card of cards; let i = index; trackBy: identify">
+            <app-card (pickCard)="pickRandomResource(i)" [card]="card" [isRoundFinished]="isRoundFinished(cards)">
+            </app-card>
+        </div>
+    </div>
+
+    <div class="cards__new-game">
+        <div class="cards__new-game__wrap">
+            <ng-template #buttonTemplate>
+                <mat-icon>{{ isRoundFinished(cards) ? 'refresh' : '' }}</mat-icon>
+            </ng-template>
+
+            <app-shadow-circle
+                (action)="resetCards()"
+                [isSmall]="true"
+                [isActive]="isRoundFinished(cards)"
+                [buttonTemplate]="buttonTemplate"
+            >
+            </app-shadow-circle>
+        </div>
+    </div>
+</div>
