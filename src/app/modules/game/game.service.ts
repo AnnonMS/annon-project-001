@@ -42,6 +42,7 @@ export class GameService {
     getPageResource(url: ResourceURL) {
         return this.http.get<ApiResourceResponse>(url).pipe(
             catchError((e: HttpErrorResponse) => {
+                console.error(e);
                 const error = new Error(
                     `Something went wrong and we couldn't fetch the data from the ${url}, statusCode: ${
                         e.statusText || 'unknown'
